@@ -2,7 +2,10 @@ package imyoi.weekly;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Solution_WeeklyChallengeTest {
 
@@ -19,5 +22,22 @@ class Solution_WeeklyChallengeTest {
 
         //then
         assertEquals(result, 3);
+    }
+
+    @Test
+    void 교점에_별_만들기() {
+        //given
+        int[][] line = {{2,-1,4},{-2,-1,4},{0,-1,1},{5,-8,-12},{5,8,12}};
+        int[][] line2 = {{0,1,-1},{1,0,-1},{1,0,1}};
+
+        //when
+        String[] result = sw.solution02(line);
+        String[] result2 = sw.solution02(line2);
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(result2));
+
+        //then
+        assertArrayEquals(result, new String[]{"....*....", ".........", ".........", "*.......*", ".........", ".........", ".........", ".........", "*.......*"});
+        assertArrayEquals(result2, new String[]{"*.*"});
     }
 }
