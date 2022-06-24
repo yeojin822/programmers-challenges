@@ -6,6 +6,7 @@ import java.util.Set;
 public class Solution_WeeklyChallenge {
 
     private static int answer = 0;
+    private static int[] parent;
 
     /**
      * #87946 피로도
@@ -60,10 +61,10 @@ public class Solution_WeeklyChallenge {
                 point.add(x + "," + y); //좌표찍기
 
                 //최소, 최대값 갱신
-                minX = Math.min(minX, (int)x);
-                minY = Math.min(minY, (int)y);
-                maxX = Math.max(maxX, (int)x);
-                maxY = Math.max(maxY, (int)y);
+                minX = Math.min(minX, x);
+                minY = Math.min(minY, y);
+                maxX = Math.max(maxX, x);
+                maxY = Math.max(maxY, y);
             }
         }
         if(minX == Integer.MAX_VALUE) { //교점 없음
@@ -81,5 +82,62 @@ public class Solution_WeeklyChallenge {
             answer[idx++] = sb.toString();
         }
         return answer;
+    }
+
+    /**
+     * #86971 전력망을 둘로 나누기
+     * ✓ union_find
+     * ✓ find(x) : 한 번만에 x가 속한 집합 번호를 찾는다 O(1)
+     * @param n : 송전탑의 개수
+     * @param wires : 전선 정보
+     * @return 전선들 중 하나를 끊어서 송전탑 개수가 비슷하도록 두 전력망으로 나누었을 때, 두 전력망이 가지고 있는 송전탑 개수의 차이(절대값) 리턴
+     * */
+    public int solution03(int n, int[][] wires) {
+        int answer = Integer.MAX_VALUE;
+        parent = new int[n+1];
+
+        int i = 0;
+        while(i < n-1) {
+            for (int j=1; j<n+1; j++) {
+                parent[j] = j;  //루트 노드 자기 자신으로 초기화
+            }
+
+            for (int j=0; j<wires.length; j++) {
+                if(i == j) continue;
+
+                int v1 = wires[j][0];
+                int v2 = wires[j][1];
+
+                union(v1, v2); //노드 연결
+            }
+
+            int cnt = 0;
+            for(int j=1; j<n+1; j++) {
+                //1번 노드와 연결되어있는 노드들의 개수 카운트
+                if(find(parent[j]) == 1) cnt++;
+            }
+            answer = Math.min(Math.abs(n-2*cnt), answer); //최소값 갱신
+            i++;
+        }
+        System.out.println(answer);
+        return answer;
+    }
+
+    //p가 속한 트리의 루트 노드를 찾음
+    public static int find(int p) {
+        if(parent[p] == p) return p;
+        return find(parent[p]); //재귀
+    }
+
+    public static void union(int v1, int v2) {
+        int x = find(v1);
+        int y = find(v2);
+
+        //더 작은 값 쪽으로 합치기
+        if(x < y) {
+            parent[y] = x;
+        }else {
+            parent[x] = y;
+        }
     }
 }
