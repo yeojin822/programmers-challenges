@@ -4,7 +4,6 @@ class Solution01 {
     /**
      * 경우에 따라서 더 효율적인 던전 파훼법이 존재
      * 단순히 우선순위가 아니기 때문에 완전탐색을 통해 모든 경우의 수를 구해야 함
-     *
      **/
     public int answer = 0;
     public boolean[] chkDg;     //던전 방문여부 확인용 배열 선언
