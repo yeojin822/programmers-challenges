@@ -50,7 +50,6 @@ public class Solution02 {
         for (long[] point : list) {
             int x = (int) (point[0] - minX);
             int y = (int) (point[1] - maxY);
-
             chkYn[Math.abs(y)][Math.abs(x)] = true;
         }
 
@@ -61,11 +60,8 @@ public class Solution02 {
             //for문 안에서는 +나 concat을 사용하기 보다는 StringBuilder를 이용해서 append해주는게 성능상 더 좋음!
             StringBuilder sb = new StringBuilder();
             for (boolean b : bs) {
-                if(b){
-                    sb.append("*");
-                }else{
-                    sb.append(".");
-                }
+                if(b) sb.append("*");
+                else sb.append(".");
             }
             answer[i] = sb.toString();
             i++;
