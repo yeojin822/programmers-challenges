@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution03 {
+    //코드 분석/이해중...
     static int[][] arr;
     public int solution(int n, int[][] wires) {
         int answer = n;
