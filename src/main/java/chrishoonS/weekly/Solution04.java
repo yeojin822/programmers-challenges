@@ -12,7 +12,6 @@ class Solution04 {
                  AAAO AAAOA E I O U 27
                  AAAU AAAOA E I O U 33
              34 AAE AAEA AAEAA E I O U
-
         */
         int idx=0; //word 각 문자열 인덱스
         for(int i=0; i<word.length(); i++){
