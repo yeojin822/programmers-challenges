@@ -19,4 +19,18 @@ class Solution_TipsTown2017Test {
         //then
         assertEquals(result, 0);
     }
+
+    @Test
+    void 예상_대진표() {
+        //given
+        int N = 8;
+        int A = 4;
+        int B = 7;
+
+        //when
+        int result = st.solution02(N, A, B);
+
+        //then
+        assertEquals(result, 3);
+    }
 }

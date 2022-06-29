@@ -21,4 +21,22 @@ public class Solution_TipsTown2017 {
         }
         return stack.isEmpty() ? 1 : 0;
     }
+
+    /**
+     * #12985 예상 대진표
+     * ✓ A번 참가자와 B번 참가자는 서로 붙게 되기 전까지 항상 이긴다고 가정합니다.
+     * @param n : 게임 참가자 수
+     * @param a : 참가자 번호
+     * @param b : 경쟁자 번호
+     * @return 처음 라운드에서 A번을 가진 참가자는 경쟁자로 생각하는 B번 참가자와 몇 번째 라운드에서 만나는지 return
+     * */
+    public int solution02(int n, int a, int b){
+        int answer = 0;
+        while(a != b) {
+            a = (a + 1)/2;
+            b = (b + 1)/2;
+            answer++; //라운드 증가
+        }
+        return answer;
+    }
 }
