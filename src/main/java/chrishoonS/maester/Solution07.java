@@ -35,9 +35,9 @@ class Solution07 {
                     int nx = q[0] + x[i];
                     int ny = q[1] + y[i];
 
-                    if (nx < 0 || ny < 0 || nx >= N || ny >= M || isVisit[nx][ny] || maps[nx][ny] == 0)
+                    if (nx < 0 || ny < 0 || nx >= N || ny >= M || isVisit[nx][ny] || maps[nx][ny] == 0){
                         continue;
-
+                    }
                     isVisit[nx][ny] = true;
                     queue.offer(new int[] {nx, ny});
                 }
