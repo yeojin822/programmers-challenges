@@ -2,8 +2,6 @@ package imyoi.swCoding;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,5 +33,17 @@ class Solution_SummerWinter2018Test {
 
         //then
         assertArrayEquals(result, new int[]{1,3});
+    }
+
+    @Test
+    void 점프와_순간_이동() {
+        //given
+        int N = 5;
+
+        //when
+        int result = ss.solution03(N);
+
+        //then
+        assertEquals(result, 2);
     }
 }
