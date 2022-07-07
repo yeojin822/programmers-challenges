@@ -82,4 +82,15 @@ public class Solution_SummerWinter2018 {
         }
         return new int[]{0,0}; //탈락자가 생기지 않는다면?
     }
+
+    /**
+     * #12980 점프와 순간 이동
+     * 1칸이동 : 건전지 1개
+     * 순간이동 : 현재까지 온 거리 x 2 (건전지 사용량이 줄지 않음)
+     * @param n : 이동하려는 거리
+     * @return 사용해야 하는 건전지 사용량의 최솟값
+     * */
+    public int solution03(int n) {
+        return Integer.bitCount(n); //num을 binary로 변환한 뒤, 1의 개수를 반환
+    }
 }
