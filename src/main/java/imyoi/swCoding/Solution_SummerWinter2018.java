@@ -93,4 +93,25 @@ public class Solution_SummerWinter2018 {
     public int solution03(int n) {
         return Integer.bitCount(n); //num을 binary로 변환한 뒤, 1의 개수를 반환
     }
+
+    /**
+     * #49993 스킬트리
+     * ✓ 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다.
+     * @param skill : 선행 스킬 순서
+     * @param skill_trees : 유저들이 만든 스킬트리1를 담은 배열
+     * @return 가능한 스킬트리 개수
+     * */
+    public int solution04(String skill, String[] skill_trees) {
+        int answer = 0;
+        for(String s : skill_trees) {
+            String temp = s;
+            for (int i = 0; i < s.length(); i++) {
+                if (!skill.contains(String.valueOf(s.charAt(i)))) {
+                    temp = temp.replace(String.valueOf(s.charAt(i)), ""); //순서상관없는 스킬
+                }
+            }
+            if (skill.indexOf(temp) == 0) answer++;
+        }
+        return answer;
+    }
 }
