@@ -46,4 +46,17 @@ class Solution_SummerWinter2018Test {
         //then
         assertEquals(result, 2);
     }
+
+    @Test
+    void 스킬트리() {
+        //given
+        String skill = "CBD";
+        String[] skill_trees = {"BACDE", "CBADF", "AECB", "BDA"};
+
+        //when
+        int result = ss.solution04(skill, skill_trees);
+
+        //then
+        assertEquals(result, 2);
+    }
 }
