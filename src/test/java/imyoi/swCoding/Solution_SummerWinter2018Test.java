@@ -59,4 +59,17 @@ class Solution_SummerWinter2018Test {
         //then
         assertEquals(result, 2);
     }
+
+    @Test
+    void 방문길이() {
+        //given
+        String dirs = "LULLLLLLU";
+
+        //when
+        int result = ss.solution05(dirs);
+        System.out.println(result);
+
+        //then
+        assertEquals(result, 7);
+    }
 }
