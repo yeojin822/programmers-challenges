@@ -10,6 +10,6 @@ class Solution12Test {
     void solution() {
         Solution12 slt12 = new Solution12();
         assertEquals(slt12.solution("ULURRDLLU"), 7);
-//        assertEquals(slt12.solution("LULLLLLLU"), 7);
+        assertEquals(slt12.solution("LULLLLLLU"), 7);
     }
 }
