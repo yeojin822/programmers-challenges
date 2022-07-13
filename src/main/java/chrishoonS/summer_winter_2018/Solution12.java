@@ -1,9 +1,6 @@
 package chrishoonS.summer_winter_2018;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 class Solution12 {
     public int solution(String dirs) {
