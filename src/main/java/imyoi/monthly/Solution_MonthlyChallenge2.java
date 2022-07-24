@@ -46,4 +46,20 @@ public class Solution_MonthlyChallenge2 {
         if(!stack.empty()) return false;
         return true;
     }
+
+    /**
+     * #77885 2개 이하로 다른 비트
+     * f(x) : x보다 크고 x와 비트가 1~2개 다른 수들 중에서 제일 작은 수
+     * @param numbers 정수가 담긴 배열
+     * @return numbers의 모든 수들에 대하여 각 수의 f 값을 배열에 차례대로 담아 return
+     * */
+    public long[] solution02(long[] numbers) {
+        long[] answer = numbers.clone();
+        for(int i=0; i<numbers.length; i++) {
+            answer[i]++; //f(X)는 x보다 커야 함
+            //XOR(자릿수의 차이) 한 값에 비트가 1~2개 다른 수들 중에서 제일 작은 수
+            answer[i] += (answer[i]^numbers[i]) >> 2; //>> 2개를 뺌 라고 규칙성이 있다고 한다..
+        }
+        return answer;
+    }
 }

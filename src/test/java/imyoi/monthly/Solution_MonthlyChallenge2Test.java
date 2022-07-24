@@ -2,6 +2,8 @@ package imyoi.monthly;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Solution_MonthlyChallenge2Test {
@@ -17,5 +19,17 @@ class Solution_MonthlyChallenge2Test {
 
         //then
         assertEquals(result,3);
+    }
+
+    @Test
+    void _2개_이하로_다른_비트() {
+        //given
+        long[] numbers = {2, 7};
+
+        //when
+        long[] result = sm.solution02(numbers);
+
+        //then
+        assertEquals(result, new long[]{3, 11});
     }
 }
