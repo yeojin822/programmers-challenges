@@ -30,6 +30,6 @@ class Solution_MonthlyChallenge2Test {
         long[] result = sm.solution02(numbers);
 
         //then
-        assertEquals(result, new long[]{3, 11});
+        assertArrayEquals(result, new long[]{3, 11});
     }
 }
