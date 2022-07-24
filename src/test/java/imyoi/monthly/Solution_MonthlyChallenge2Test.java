@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class Solution_MonthlyChallenge2Test {
     private final static Solution_MonthlyChallenge2 sm = new Solution_MonthlyChallenge2();
