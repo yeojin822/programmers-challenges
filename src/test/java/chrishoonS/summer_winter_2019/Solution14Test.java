@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class Solution13Test {
+class Solution14Test {
 
     @Test
     void solution() {

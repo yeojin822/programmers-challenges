@@ -2,7 +2,7 @@ package chrishoonS.monthCode1;
 
 import java.util.ArrayList;
 
-class Solution13 {
+class Solution14 {
     public int[] solution(int n) {
         //배열 크기 설정
         int[] answer = new int[(n*(n+1))/2];
