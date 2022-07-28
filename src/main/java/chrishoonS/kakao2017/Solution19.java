@@ -1,47 +1,60 @@
 package chrishoonS.kakao2017;
 
+import java.util.HashMap;
+
 public class Solution19 {
-    private int answer = 0;
-    private String[] friends = {"A", "C", "F", "J", "M", "N", "R", "T"};
+    static String[] d;
+    static HashMap<Character,Integer> map ;
+    static boolean[] visited;
+    static int[] ch;
+    static int answer;
 
     public int solution(int n, String[] data) {
-        boolean[] isVisited = new boolean[8];
-        dfs("", isVisited, data);
-        System.out.println(answer);
+        d = data;
+        map = new HashMap<>();
+        visited = new boolean[8];
+        ch = new int[8];
+        answer = 0;
+        map.put('A',0);
+        map.put('C',1);
+        map.put('F',2);
+        map.put('J',3);
+        map.put('M',4);
+        map.put('N',5);
+        map.put('R',6);
+        map.put('T',7);
+        dfs(0);
         return answer;
     }
 
-    private void dfs(String names, boolean[] isVisited, String[] datas) {
-        if (names.length() == 7) {
-            if (check(names, datas)) { // 조건만족 체크
-                answer++;
-            }
-            return;
+    public static void dfs(int idx){
+        if(idx == 8){
+            if(check()) answer++;
         }
-        for (int i = 0; i < 8; i++) { // 조합
-            if (!isVisited[i]) {
-                isVisited[i] = true;
-                String name = names + friends[i];
-                dfs(name, isVisited, datas);
-                isVisited[i] = false;
+        else{
+            for(int i=0;i<8;i++){
+                if(!visited[i]){
+                    visited[i] = true;
+                    ch[idx] = i;
+                    dfs(idx + 1);
+                    visited[i] = false;
+                }
             }
         }
     }
 
-    // 조건대로 섰는지 체크
-    private boolean check(String names, String[] datas) {
-        for (String data : datas) {
-            int position1 = names.indexOf(data.charAt(0)); // 프렌즈 포지션1
-            int position2 = names.indexOf(data.charAt(2)); // 프렌즈 포지션2
-            char op = data.charAt(3); // 수식
-            int index = data.charAt(4) -'0'; // 간격
-            if (op == '=') {
-                if (!(Math.abs(position1 - position2) == index+1)) return false; //둘 포지션 차이를 구하기 위해선 index+1 을 해야함에 주의
-            } else if (op == '>') {
-                if (!(Math.abs(position1 - position2) > index+1)) return false;
-            } else if (op == '<') {
-                if (!(Math.abs(position1 - position2) < index+1)) return false;
-            }
+    public static boolean check(){
+        int a,b,res;
+        char op;
+        for(String s : d){
+            a = ch[map.get(s.charAt(0))];
+            b = ch[map.get(s.charAt(2))];
+            op = s.charAt(3);
+            res = s.charAt(4)-'0' + 1;
+
+            if(op == '='){ if(Math.abs(a-b)!=res) return false;}
+            else if(op == '>'){ if(Math.abs(a-b) <= res) return false;}
+            else {if(Math.abs(a-b) >= res) return false;}
         }
         return true;
     }
