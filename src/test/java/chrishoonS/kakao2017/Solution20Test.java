@@ -8,8 +8,8 @@ class Solution20Test {
 
     @Test
     void solution() {
-        Solution20 slt19 = new Solution20();
-        assertEquals(slt19.solution(2, new String[]{"N~F=0", "R~T>2"}), 3648);
-        assertEquals(slt19.solution(2, new String[]{"M~C<2", "C~M>1"}), 0);
+        Solution20 slt20 = new Solution20();
+        assertEquals(slt20.solution(2, new String[]{"N~F=0", "R~T>2"}), 3648);
+        assertEquals(slt20.solution(2, new String[]{"M~C<2", "C~M>1"}), 0);
     }
 }
