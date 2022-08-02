@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Solution21 {
+public class Solution22 {
     public int[] solution(String s) {
 
         Map<String, Integer> map = new HashMap<>();

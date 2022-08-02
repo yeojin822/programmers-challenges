@@ -1,15 +1,15 @@
 package chrishoonS.kakao2021;
 
-import chrishoonS.kakao2019.Solution21;
+import chrishoonS.kakao2019.Solution22;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class Solution21Test {
+class Solution22Test {
 
     @Test
     void solution() {
-        Solution21 slt21 = new Solution21();
+        Solution22 slt21 = new Solution22();
         assertArrayEquals(slt21.solution("{{2},{2,1},{2,1,3},{2,1,3,4}}"), new int[] {2, 1, 3, 4});
         assertArrayEquals(slt21.solution("{{20,111},{111}}"), new int[] {111, 20});
         assertArrayEquals(slt21.solution("{{123}}"), new int[]{123});
