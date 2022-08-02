@@ -1,5 +1,0 @@
-package imyoi;
-
-class testTest {
-
-}
