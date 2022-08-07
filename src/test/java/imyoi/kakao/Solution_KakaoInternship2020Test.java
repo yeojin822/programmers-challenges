@@ -8,7 +8,7 @@ class Solution_KakaoInternship2020Test {
     private static final Solution_KakaoInternship2020 sk = new Solution_KakaoInternship2020();
 
     @Test
-    void solution() {
+    void 수식_최대화() {
         //given
         String expression = "100-200*300-500+20";
 
