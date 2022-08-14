@@ -19,4 +19,17 @@ class Solution_KakaoBlind2018Test {
         //then
         assertEquals(result, 16384);
     }
+
+    @Test
+    void 캐시() {
+        //given
+        int cacheSize = 3;
+        String[] cities = {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"};
+
+        //when
+        int result = sk.solution02(cacheSize, cities);
+
+        //then
+        assertEquals(result, 50);
+    }
 }

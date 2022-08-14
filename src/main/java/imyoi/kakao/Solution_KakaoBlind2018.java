@@ -1,6 +1,7 @@
 package imyoi.kakao;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Solution_KakaoBlind2018 {
@@ -55,5 +56,47 @@ public class Solution_KakaoBlind2018 {
             }
         }
         return lst;
+    }
+
+
+    /**
+     * #17680 캐시
+     * - 캐시 교체 알고리즘은 LRU(Least Recently Used)를 사용한다
+     * -> 가장 오랫동안 참조되지 않은 페이지를 교체하는 기법
+     * - cache hit일 경우 실행시간은 1이다.
+     * - cache miss일 경우 실행시간은 5이다.
+     * @param cacheSize
+     * @param cities
+     * @return 입력된 도시이름 배열을 순서대로 처리할 때, "총 실행시간"을 출력
+     * */
+    static final int CACHE_HIT = 1;
+    static final int CACHE_MISS = 5;
+
+    public int solution02(int cacheSize, String[] cities) {
+        int answer = 0;
+
+        LinkedList<String> cache = new LinkedList<>();
+
+        //cacheSize가 0일때의 처리
+        if(cacheSize == 0) return 5 * cities.length;
+
+        for(int i = 0 ; i < cities.length ; ++i){
+            String city = cities[i].toUpperCase();
+
+            //리스트에서 삭제 후 다시 삽입
+            if(cache.remove(city)){
+                answer += CACHE_HIT;
+                cache.add(city);
+            } else {
+                answer += CACHE_MISS;
+
+                //다 찼을 경우 삭제 후 맨 처음꺼(index=0) 다시 삽입
+                if(cache.size() == cacheSize){
+                    cache.remove(0);
+                }
+                cache.add(city);
+            }
+        }
+        return answer;
     }
 }
