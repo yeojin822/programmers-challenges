@@ -99,4 +99,90 @@ public class Solution_KakaoBlind2018 {
         }
         return answer;
     }
+
+
+    /**
+     * #17679 프렌즈 4블록
+     * - 4x4 블록이 같을 경우 지워지는데, 4x4가 겹쳐있는 경우에도 모두 지워진다.
+     * 1. 사라질 블록(4*4에 해당하는 블록) 체크
+     * 2. 체크된 블록 제거
+     * 3. 블록 내리기(=제거된 블록 자리 채우기)
+     * 4. 더 이상 사라질 블록이 없을 때까지 반복 어떻게 해야할지는 이해 됨..ㅎ
+     * @param m : 판의 높이
+     * @param n : 판의 폭
+     * @param board : 판의 배치 정보
+     * @return
+     * */
+    public int solution03(int m, int n, String[] board) {
+        int answer = 0;
+
+        //변경을 쉽게 하기 위해 이중배열로 바꿈
+        char[][] map = new char[m][n];
+        for(int i = 0 ; i < m ; ++i) {
+            map[i] = board[i].toCharArray();
+        }
+
+        //체크 → 제거 → 내리기 반복
+        while(true) {
+            int cnt = check(m, n, map);
+            if(cnt == 0) break;
+            answer += cnt;
+
+            drop(m, n, map); //내리기
+        }
+
+        return answer;
+    }
+
+    private int check(int m, int n, char[][] map) {
+        int cnt = 0;
+        boolean[][] isChecked = new boolean[m][n];
+        for(int i=0; i<m-1; ++i) {
+            for(int j=0; j<n-1; ++j) {
+                if(map[i][j] == '0') continue;
+                checkFour(map, isChecked, i, j); //4*4 블록 체크
+            }
+        }
+        for(int i=0; i<m; ++i) {
+            for(int j=0; j<n; ++j) {
+                if(isChecked[i][j]) {
+                    cnt++;
+                    map[i][j] = '0'; //빈칸으로 정의
+                }
+            }
+        }
+
+        return cnt;
+    }
+
+    private void checkFour(char[][] map, boolean[][] isChecked, int i, int j) {
+        char block = map[i][j];
+        for(int r = i ; r < i + 2 ; ++r) {
+            for(int c = j ; c < j + 2 ; ++c) {
+                if(map[r][c] != block) return;
+            }
+        }
+
+        for(int r=i; r<i+2; ++r) {
+            for(int c=j; c<j+2; ++c) {
+                isChecked[r][c] = true; //4*4 맞음!
+            }
+        }
+    }
+
+    private void drop(int m, int n, char[][] map) {
+        for(int c=0; c<n; ++c) {
+            for(int r=m-1; r>=0; --r) {
+                if(map[r][c] == '0') { //제거된 블록이라면
+                    for(int nr=r-1; nr>=0; --nr) {
+                        if(map[nr][c] != '0') {
+                            map[r][c] = map[nr][c];
+                            map[nr][c] = '0';
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

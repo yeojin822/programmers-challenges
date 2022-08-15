@@ -32,4 +32,38 @@ class Solution_KakaoBlind2018Test {
         //then
         assertEquals(result, 50);
     }
+
+    /*
+     * 첫 번째에는 A 블록 6개가 지워지고,
+     * 두 번째에는 B 블록 4개와 C 블록 4개가 지워져,
+     * 모두 14개의 블록이 지워진다.
+     *
+     * [첫 번째]
+     * => A: 6개
+     * CCBDE
+     * AAADE
+     * AAABF
+     * CCBBF
+     *
+     * [두 번째]
+     * => B: 4개 / C: 4개
+     *    DE
+     *    DE
+     * CCBBF
+     * CCBBF
+     *
+     * */
+    @Test
+    void 프렌즈_4블록() {
+        //given
+        int m = 4;
+        int n = 5;
+        String[] board = {"CCBDE", "AAADE", "AAABF", "CCBBF"};
+
+        //when
+        int result = sk.solution03(m, n, board);
+
+        //then
+        assertEquals(result, 14);
+    }
 }
