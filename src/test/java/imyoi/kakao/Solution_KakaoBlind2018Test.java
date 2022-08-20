@@ -2,8 +2,7 @@ package imyoi.kakao;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -81,5 +80,17 @@ class Solution_KakaoBlind2018Test {
 
         //then
         assertArrayEquals(result, new String[]{"img1.png", "IMG01.GIF", "img02.png", "img2.JPG", "img10.png", "img12.png"});
+    }
+
+    @Test
+    void 압축() {
+        //given
+        String msg = "KAKAO";
+
+        //when
+        int[] result = sk.solution05(msg);
+
+        //then
+        assertArrayEquals(result, new int[]{11,1,27,15});
     }
 }

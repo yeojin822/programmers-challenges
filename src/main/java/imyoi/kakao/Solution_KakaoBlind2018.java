@@ -56,7 +56,7 @@ public class Solution_KakaoBlind2018 {
         return lst;
     }
 
-
+    /*--------------------------------------------------------------------------------------------------------------*/
     /**
      * #17680 캐시
      * - 캐시 교체 알고리즘은 LRU(Least Recently Used)를 사용한다
@@ -98,7 +98,7 @@ public class Solution_KakaoBlind2018 {
         return answer;
     }
 
-
+    /*--------------------------------------------------------------------------------------------------------------*/
     /**
      * #17679 프렌즈 4블록
      * - 4x4 블록이 같을 경우 지워지는데, 4x4가 겹쳐있는 경우에도 모두 지워진다.
@@ -184,9 +184,11 @@ public class Solution_KakaoBlind2018 {
         }
     }
 
-
+    /*--------------------------------------------------------------------------------------------------------------*/
     /**
      * #17686 파일명 정렬
+     * @param files : 1000 개 이하의 파일명을 포함하는 문자열 배열
+     * @return 주어진 기준에 따라 정렬
      * */
     public String[] solution04(String[] files) {
         Arrays.sort(files, new Comparator<String>(){
@@ -221,5 +223,37 @@ public class Solution_KakaoBlind2018 {
         }
         //만들어진 문자열은 정수형태로 변환 후 리턴
         return Integer.parseInt(result);
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17684 압축
+     * @param msg : 영문 대문자로만 이뤄진 문자열
+     * @return 주어진 문자열을 압축한 후의 사전 색인 번호를 배열로 출력하라.
+     * */
+    public int[] solution05(String msg) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        int idx = 27;
+
+        for(int i=0; i<idx; i++) {
+            map.put(String.valueOf((char)('A'+i)), i+1); //사전 초기화
+        }
+
+        for(int i=0; i<msg.length(); i++) {
+            String w = "";
+            //현재 단어가 사전에 포함된 단어인지 체크
+            while(i < msg.length() && map.containsKey(w+msg.charAt(i))) {
+                w += msg.charAt(i);
+                i++;
+            }
+            list.add(map.get(w)); //현재 단어(w)의 색인번호 결과리스트에 추가
+            if(i < msg.length()) { //마지막 인덱스가 아니라면
+                map.put(w+msg.charAt(i), idx); //사전에 추가 (w+c)
+                idx++;
+                i--;
+            }
+        }
+        return list.stream().mapToInt(x -> x).toArray();
     }
 }
