@@ -1,8 +1,6 @@
 package imyoi.kakao;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Solution_KakaoBlind2018 {
 
@@ -184,5 +182,44 @@ public class Solution_KakaoBlind2018 {
                 }
             }
         }
+    }
+
+
+    /**
+     * #17686 파일명 정렬
+     * */
+    public String[] solution04(String[] files) {
+        Arrays.sort(files, new Comparator<String>(){
+            @Override
+            public int compare(String s1, String s2) {
+                //1. HEAD 부분 비교 (대소문자 구분 안함)
+                String head1 = s1.split("[0-9]")[0].toLowerCase();
+                String head2 = s2.split("[0-9]")[0].toLowerCase();
+                int result = head1.compareTo(head2);
+
+                //2. 같을 경우 NUMBER(숫자) 부분 비교
+                if (result == 0) {
+                    //문자1 > 문자2 인 경우 두 값의 차는 양수, 문자1 < 문자2 인 경우 음수로 판단
+                    result = getNumber(s1, head1) - getNumber(s2, head2);
+                }
+
+                //0이 아닌 다른 것을 반환하면 Comparator가 수행됨
+                return result;
+            }
+        });
+        return files;
+    }
+
+    public int getNumber(String s, String head) {
+        String result = "";
+        char[] cArr = s.substring(head.length()).toCharArray();
+        for(char c : cArr) {
+            //해당 값이 숫자인지 판별하고 숫자인 경우끼리 합침
+            if(Character.isDigit(c) && result.length() < 5) {
+                result += c;
+            }
+        }
+        //만들어진 문자열은 정수형태로 변환 후 리턴
+        return Integer.parseInt(result);
     }
 }

@@ -2,6 +2,10 @@ package imyoi.kakao;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Solution_KakaoBlind2018Test {
@@ -65,5 +69,17 @@ class Solution_KakaoBlind2018Test {
 
         //then
         assertEquals(result, 14);
+    }
+
+    @Test
+    void 파일명_정렬() {
+        //given
+        String[] files = {"img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"};
+
+        //when
+        String[] result = sk.solution04(files);
+
+        //then
+        assertArrayEquals(result, new String[]{"img1.png", "IMG01.GIF", "img02.png", "img2.JPG", "img10.png", "img12.png"});
     }
 }
