@@ -256,4 +256,52 @@ public class Solution_KakaoBlind2018 {
         }
         return list.stream().mapToInt(x -> x).toArray();
     }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17683 방금그곡
+     * @param m : 네오가 기억한 멜로디를 담은 문자열
+     * @param musicinfos : 방송된 곡의 정보를 담고 있는 배열
+     * @return 조건과 일치하는 음악 제목을 출력한다.
+     * */
+    public String solution06(String m, String[] musicinfos) {
+        int maxtime = 0;
+        String answer = "(None)"; //조건이 일치하는 음악이 없을 경우 None 반환
+        m = convert(m); //기억한 멜로디에서 #이 포함된 문자는 소문자로 변환
+
+        for(int i = 0; i< musicinfos.length;i++) {
+            String[] tmp = musicinfos[i].split(",");
+            tmp[3] = convert(tmp[3]); //곡 정보 중 악보정보에서 #이 포함된 문자는 소문자로 변환
+
+            //runningTime 계산 (종료시간 - 시작시간)
+            String[] startTime = tmp[0].split(":"); //시작시간
+            String[] endTime = tmp[1].split(":");   //종료시간
+            int hour = Integer.parseInt(endTime[0]) - Integer.parseInt(startTime[0]);
+            int min = Integer.parseInt(endTime[1]) - Integer.parseInt(startTime[1]) + (hour * 60);
+            StringBuilder sb = new StringBuilder(); // 재싱시간동안 재생된 전체멜로디
+            for(int j = 0; j<min;j++){
+                //음악 재생시간동안 만들어지는 음을 문자열로 만듬
+                sb.append(tmp[3].charAt(j % tmp[3].length()));
+            }
+
+            if(sb.toString().contains(m)){ //기억하는 음이 만들어진 문자열에 있고
+                if(maxtime < sb.toString().length()){
+                    maxtime = sb.toString().length();
+                    answer = tmp[2]; //현재 노래제목을 넣어줌
+                }
+            }
+        }
+        return answer;
+    }
+
+    private String convert(String m) {
+        //#가 포함된 문자인경우 구분하기 쉽도록 소문자로 변환해준다
+        m = m.replace("A#","a");
+        m = m.replace("C#","c");
+        m = m.replace("D#","d");
+        m = m.replace("F#","f");
+        m = m.replace("G#","g");
+        m = m.replace("E#","e");
+        return m;
+    }
 }

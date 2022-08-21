@@ -83,14 +83,16 @@ class Solution_KakaoBlind2018Test {
     }
 
     @Test
-    void 압축() {
+    void 방금그곡() {
         //given
-        String msg = "KAKAO";
+        String m = "ABC";
+        String[] musicinfos = {"12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"};
 
         //when
-        int[] result = sk.solution05(msg);
+        String result = sk.solution06(m, musicinfos);
+        System.out.println(result);
 
         //then
-        assertArrayEquals(result, new int[]{11,1,27,15});
+        assertEquals(result, "WORLD");
     }
 }
