@@ -83,6 +83,18 @@ class Solution_KakaoBlind2018Test {
     }
 
     @Test
+    void 압축() {
+        //given
+        String msg = "KAKAO";
+
+        //when
+        int[] result = sk.solution05(msg);
+
+        //then
+        assertArrayEquals(result, new int[]{11,1,27,15});
+    }
+
+    @Test
     void 방금그곡() {
         //given
         String m = "ABC";
