@@ -2,6 +2,9 @@ package imyoi.kakao;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Solution_KakaoBlind2018Test {
@@ -65,5 +68,43 @@ class Solution_KakaoBlind2018Test {
 
         //then
         assertEquals(result, 14);
+    }
+
+    @Test
+    void 파일명_정렬() {
+        //given
+        String[] files = {"img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"};
+
+        //when
+        String[] result = sk.solution04(files);
+
+        //then
+        assertArrayEquals(result, new String[]{"img1.png", "IMG01.GIF", "img02.png", "img2.JPG", "img10.png", "img12.png"});
+    }
+
+    @Test
+    void 압축() {
+        //given
+        String msg = "KAKAO";
+
+        //when
+        int[] result = sk.solution05(msg);
+
+        //then
+        assertArrayEquals(result, new int[]{11,1,27,15});
+    }
+
+    @Test
+    void 방금그곡() {
+        //given
+        String m = "ABC";
+        String[] musicinfos = {"12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"};
+
+        //when
+        String result = sk.solution06(m, musicinfos);
+        System.out.println(result);
+
+        //then
+        assertEquals(result, "WORLD");
     }
 }

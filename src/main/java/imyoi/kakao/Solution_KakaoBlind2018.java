@@ -1,8 +1,6 @@
 package imyoi.kakao;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Solution_KakaoBlind2018 {
 
@@ -58,7 +56,7 @@ public class Solution_KakaoBlind2018 {
         return lst;
     }
 
-
+    /*--------------------------------------------------------------------------------------------------------------*/
     /**
      * #17680 캐시
      * - 캐시 교체 알고리즘은 LRU(Least Recently Used)를 사용한다
@@ -100,7 +98,7 @@ public class Solution_KakaoBlind2018 {
         return answer;
     }
 
-
+    /*--------------------------------------------------------------------------------------------------------------*/
     /**
      * #17679 프렌즈 4블록
      * - 4x4 블록이 같을 경우 지워지는데, 4x4가 겹쳐있는 경우에도 모두 지워진다.
@@ -184,5 +182,126 @@ public class Solution_KakaoBlind2018 {
                 }
             }
         }
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17686 파일명 정렬
+     * @param files : 1000 개 이하의 파일명을 포함하는 문자열 배열
+     * @return 주어진 기준에 따라 정렬
+     * */
+    public String[] solution04(String[] files) {
+        Arrays.sort(files, new Comparator<String>(){
+            @Override
+            public int compare(String s1, String s2) {
+                //1. HEAD 부분 비교 (대소문자 구분 안함)
+                String head1 = s1.split("[0-9]")[0].toLowerCase();
+                String head2 = s2.split("[0-9]")[0].toLowerCase();
+                int result = head1.compareTo(head2);
+
+                //2. 같을 경우 NUMBER(숫자) 부분 비교
+                if (result == 0) {
+                    //문자1 > 문자2 인 경우 두 값의 차는 양수, 문자1 < 문자2 인 경우 음수로 판단
+                    result = getNumber(s1, head1) - getNumber(s2, head2);
+                }
+
+                //0이 아닌 다른 것을 반환하면 Comparator가 수행됨
+                return result;
+            }
+        });
+        return files;
+    }
+
+    public int getNumber(String s, String head) {
+        String result = "";
+        char[] cArr = s.substring(head.length()).toCharArray();
+        for(char c : cArr) {
+            //해당 값이 숫자인지 판별하고 숫자인 경우끼리 합침
+            if(Character.isDigit(c) && result.length() < 5) {
+                result += c;
+            }
+        }
+        //만들어진 문자열은 정수형태로 변환 후 리턴
+        return Integer.parseInt(result);
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17684 압축
+     * @param msg : 영문 대문자로만 이뤄진 문자열
+     * @return 주어진 문자열을 압축한 후의 사전 색인 번호를 배열로 출력하라.
+     * */
+    public int[] solution05(String msg) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+        int idx = 27;
+
+        for(int i=0; i<idx; i++) {
+            map.put(String.valueOf((char)('A'+i)), i+1); //사전 초기화
+        }
+
+        for(int i=0; i<msg.length(); i++) {
+            String w = "";
+            //현재 단어가 사전에 포함된 단어인지 체크
+            while(i < msg.length() && map.containsKey(w+msg.charAt(i))) {
+                w += msg.charAt(i);
+                i++;
+            }
+            list.add(map.get(w)); //현재 단어(w)의 색인번호 결과리스트에 추가
+            if(i < msg.length()) { //마지막 인덱스가 아니라면
+                map.put(w+msg.charAt(i), idx); //사전에 추가 (w+c)
+                idx++;
+                i--;
+            }
+        }
+        return list.stream().mapToInt(x -> x).toArray();
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17683 방금그곡
+     * @param m : 네오가 기억한 멜로디를 담은 문자열
+     * @param musicinfos : 방송된 곡의 정보를 담고 있는 배열
+     * @return 조건과 일치하는 음악 제목을 출력한다.
+     * */
+    public String solution06(String m, String[] musicinfos) {
+        int maxtime = 0;
+        String answer = "(None)"; //조건이 일치하는 음악이 없을 경우 None 반환
+        m = convert(m); //기억한 멜로디에서 #이 포함된 문자는 소문자로 변환
+
+        for(int i = 0; i< musicinfos.length;i++) {
+            String[] tmp = musicinfos[i].split(",");
+            tmp[3] = convert(tmp[3]); //곡 정보 중 악보정보에서 #이 포함된 문자는 소문자로 변환
+
+            //runningTime 계산 (종료시간 - 시작시간)
+            String[] startTime = tmp[0].split(":"); //시작시간
+            String[] endTime = tmp[1].split(":");   //종료시간
+            int hour = Integer.parseInt(endTime[0]) - Integer.parseInt(startTime[0]);
+            int min = Integer.parseInt(endTime[1]) - Integer.parseInt(startTime[1]) + (hour * 60);
+            StringBuilder sb = new StringBuilder(); // 재싱시간동안 재생된 전체멜로디
+            for(int j = 0; j<min;j++){
+                //음악 재생시간동안 만들어지는 음을 문자열로 만듬
+                sb.append(tmp[3].charAt(j % tmp[3].length()));
+            }
+
+            if(sb.toString().contains(m)){ //기억하는 음이 만들어진 문자열에 있고
+                if(maxtime < sb.toString().length()){
+                    maxtime = sb.toString().length();
+                    answer = tmp[2]; //현재 노래제목을 넣어줌
+                }
+            }
+        }
+        return answer;
+    }
+
+    private String convert(String m) {
+        //#가 포함된 문자인경우 구분하기 쉽도록 소문자로 변환해준다
+        m = m.replace("A#","a");
+        m = m.replace("C#","c");
+        m = m.replace("D#","d");
+        m = m.replace("F#","f");
+        m = m.replace("G#","g");
+        m = m.replace("E#","e");
+        return m;
     }
 }
