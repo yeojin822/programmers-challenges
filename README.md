@@ -34,6 +34,7 @@ git commit -m "[87946]피로도_20220620" -m "https://programmers.co.kr/learn/co
 - PR 제목: 이름 / 주차 / 몇 문제
 -  ```yeojin / 6월 3주차  / 5문제 ```
 -  comment는 자유 (코드 참고사항이나, 기록용 메모 가능) 
+- 매주 월요일 오전까지 PR 요청하기! 
     
 
 <br />
