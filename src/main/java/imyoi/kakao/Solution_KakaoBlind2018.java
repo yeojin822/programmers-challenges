@@ -304,4 +304,29 @@ public class Solution_KakaoBlind2018 {
         m = m.replace("E#","e");
         return m;
     }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #17687 [3차] n진수 게임
+     * @param n : 진법
+     * @param t : 미리 구할 숫자의 갯수
+     * @param m : 게임에 참가하는 인원
+     * @param p : 튜브의 순서
+     * @return 튜브가 말해야 하는 숫자 t개를 공백 없이 차례대로 나타낸 문자열. 단, 10~15는 각각 대문자 A~F로 출력한다.
+     * */
+    public String solution07(int n, int t, int m, int p) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder answer = new StringBuilder();
+
+        //게임 참가 인원(m) * 미리 구할 숫자 갯수(t) 만큼 될 때 까지 반복
+        for(int i=0; sb.length()<m*t; i++) {
+            sb.append(Integer.toString(i, n)); //n진수로 변환된 값 합치기
+        }
+        //튜브의 순서에 해당하는 글자들만 추출
+        for(int i=p-1; i<m*t; i+=m) {
+            answer.append(sb.charAt(i));
+        }
+
+        return answer.toString().toUpperCase();
+    }
 }

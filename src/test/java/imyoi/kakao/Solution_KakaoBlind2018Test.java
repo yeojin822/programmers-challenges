@@ -107,4 +107,19 @@ class Solution_KakaoBlind2018Test {
         //then
         assertEquals(result, "WORLD");
     }
+
+    @Test
+    void n진수_게임() {
+        //given
+        int n = 2;
+        int t = 4;
+        int m = 2;
+        int p = 1;
+
+        //when
+        String result = sk.solution07(n, t, m, p);
+
+        //then
+        assertEquals(result, "0111");
+    }
 }
