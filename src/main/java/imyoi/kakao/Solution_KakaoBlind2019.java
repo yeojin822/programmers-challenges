@@ -15,7 +15,6 @@ public class Solution_KakaoBlind2019 {
         ArrayList<String> arr = new ArrayList();
         Map<String, String> usrInfo = new HashMap();
 
-        int cnt = 0; //변경 시 카운트
         for (int i = 0; i < record.length; i++) { //record 반복탐색 (행동, 유저아이디, 닉네임)
             String[] command = record[i].split(" "); //공백 기준으로 나누기
             if (command[0].equals("Enter")) { //입장
@@ -26,7 +25,6 @@ public class Solution_KakaoBlind2019 {
                 continue;
             } else { //변경
                 usrInfo.put(command[1], command[2]);
-                cnt++;
             }
         }
 

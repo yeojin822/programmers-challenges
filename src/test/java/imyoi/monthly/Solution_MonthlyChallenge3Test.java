@@ -20,4 +20,16 @@ class Solution_MonthlyChallenge3Test {
         //then
         assertArrayEquals(result, new int[]{3,2,2,3});
     }
+
+    @Test
+    void 빛의_경로_사이클() {
+        //given
+        String[] grid = {"SL","LR"};
+
+        //when
+        int[] result = sm.solution02(grid);
+
+        //then
+        assertArrayEquals(result, new int[]{16});
+    }
 }
