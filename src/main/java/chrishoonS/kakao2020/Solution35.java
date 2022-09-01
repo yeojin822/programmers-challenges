@@ -1,10 +1,5 @@
 package chrishoonS.kakao2020;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Solution35 {
     public int solution(String s) {
         int answer = s.length();    // 압축하기 전 문자열 길이로 초기화
