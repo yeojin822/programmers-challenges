@@ -1,9 +1,8 @@
 package chrishoonS.kakao2020;
 
-import chrishoonS.kakao2019.Solution33;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Solution36Test {
 
