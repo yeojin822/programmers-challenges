@@ -1,5 +1,7 @@
 package imyoi.kakao;
 
+import java.util.Stack;
+
 public class Solution_KakaoBlind2020 {
 
     /**
@@ -34,5 +36,61 @@ public class Solution_KakaoBlind2020 {
             answer = Math.min(answer, sb.length());
         }
         return answer;
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #60058 괄호변환
+     * @param p : 균형잡힌 괄호 문자열
+     * @return 올바른 괄호 문자열
+     * */
+    static int pos;
+
+    public String solution02(String p) {
+        if(p.isEmpty()) return p;
+        boolean isCorrect = isCorrect(p);
+
+        //u, v 분리
+        String u = p.substring(0, pos);
+        String v = p.substring(pos, p.length());
+
+        if(isCorrect) { //올바른 괄호 문자열이라면
+            return u + solution02(v); //재귀함수
+        }
+
+        String answer = "(" + solution02(v) + ")";
+        for(int i = 1; i < u.length()-1; i++) {
+            if(u.charAt(i) == '(') {
+                answer += ")";
+            }else answer += "(";
+        }
+        return answer;
+    }
+
+    boolean isCorrect(String s){
+        boolean isCorrect = true;
+        int left= 0, right = 0;
+        Stack<Character> stack = new Stack<>();
+
+        for(int i=0; i<s.length(); i++) {
+            char c = s.charAt(i);
+            if(c == '(') {
+                left++;
+                stack.push('(');
+            }else if(c == ')') {
+                right++;
+                if(!stack.isEmpty()) {
+                    stack.pop();
+                }else {
+                    isCorrect = false;
+                }
+            }
+
+            if(left == right) {
+                pos = i+1;
+                return isCorrect;
+            }
+        }
+        return true;
     }
 }
