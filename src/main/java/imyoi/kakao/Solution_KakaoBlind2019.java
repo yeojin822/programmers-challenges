@@ -37,4 +37,56 @@ public class Solution_KakaoBlind2019 {
         }
         return answer;
     }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #42890 후보키
+     * @param relation : 2차원 문자열 배열
+     * @return 후보 키의 개수 return
+     * */
+    static ArrayList<HashSet<Integer>> candidateKeys; //후보키
+    static int answer;
+    public int solution02(String[][] relation) {;
+        candidateKeys = new ArrayList<>();
+        HashSet<Integer> keys = new HashSet<>();
+        for(int i = 1; i <= relation[0].length; i++) {
+            combination(0, 0, i, keys, relation[0].length, relation);
+        }
+
+        return answer;
+    }
+
+    private void combination(int idx, int start, int keysize, HashSet<Integer> keys, int n, String[][] relation) {
+        if(idx == keysize) {
+            //중복방지
+            for(HashSet<Integer> key : candidateKeys) {
+                if(keys.containsAll(key)) return;
+            }
+
+            int count = 0;
+            HashMap<String, String> map = new HashMap<>();
+            for(int i = 0; i < relation.length; i++) {
+                StringBuilder sb = new StringBuilder();
+                for(int k : keys) {
+                    sb.append(relation[i][k]);
+                }
+                if(map.containsKey(sb.toString())) return; //중복 선택시 멈춤
+                map.put(sb.toString(), sb.toString());
+                count++;
+            }
+
+            //후보키 저장
+            if(count == relation.length) {
+                candidateKeys.add(keys);
+                answer++;
+            }
+            return;
+        }
+
+        for(int i = start; i < n; i++) {
+            HashSet<Integer> selectedKeys = new HashSet<>(keys);
+            selectedKeys.add(i);
+            combination(idx+1, i+1, keysize, selectedKeys, n, relation);
+        }
+    }
 }

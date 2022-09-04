@@ -18,4 +18,16 @@ class Solution_KakaoBlind2019Test {
         //then
         assertArrayEquals(result, new String[]{"Prodo님이 들어왔습니다.", "Ryan님이 들어왔습니다.", "Prodo님이 나갔습니다.", "Prodo님이 들어왔습니다."});
     }
+    
+    @Test
+    void 후보키() {
+        //given
+        String[][] relation = {{"100","ryan","music","2"},{"200","apeach","math","2"},{"300","tube","computer","3"},{"400","con","computer","4"},{"500","muzi","music","3"},{"600","apeach","music","2"}};
+        
+        //when
+        int result = sk.solution02(relation);
+
+        //then
+        assertEquals(result, 2);
+    }
 }
