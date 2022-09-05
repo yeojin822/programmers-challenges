@@ -9,10 +9,10 @@ class Solution22Test {
 
     @Test
     void solution() {
-        Solution22 slt21 = new Solution22();
-        assertArrayEquals(slt21.solution("{{2},{2,1},{2,1,3},{2,1,3,4}}"), new int[] {2, 1, 3, 4});
-        assertArrayEquals(slt21.solution("{{20,111},{111}}"), new int[] {111, 20});
-        assertArrayEquals(slt21.solution("{{123}}"), new int[]{123});
-        assertArrayEquals(slt21.solution("{{4,2,3},{3},{2,3,4,1},{2,3}}"), new int[]{3, 2, 4, 1});
+        Solution22 slt22 = new Solution22();
+        assertArrayEquals(slt22.solution("{{2},{2,1},{2,1,3},{2,1,3,4}}"), new int[] {2, 1, 3, 4});
+        assertArrayEquals(slt22.solution("{{20,111},{111}}"), new int[] {111, 20});
+        assertArrayEquals(slt22.solution("{{123}}"), new int[]{123});
+        assertArrayEquals(slt22.solution("{{4,2,3},{3},{2,3,4,1},{2,3}}"), new int[]{3, 2, 4, 1});
     }
 }
