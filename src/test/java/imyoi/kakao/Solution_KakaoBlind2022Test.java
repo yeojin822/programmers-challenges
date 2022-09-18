@@ -19,4 +19,17 @@ class Solution_KakaoBlind2022Test {
         //then
         assertEquals(result, 3);
     }
+
+    @Test
+    void 주차_요금_계산() {
+        //given
+        int[] fees = {120,0,60,591};
+        String[] records = {"16:00 3961 IN","16:00 0202 IN","18:00 3961 OUT","18:00 0202 OUT","23:58 3961 IN"};
+
+        //when
+        int[] result = sk.solution02(fees, records);
+
+        //then
+        assertArrayEquals(result, new int[]{0,591});
+    }
 }

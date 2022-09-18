@@ -1,5 +1,7 @@
 package imyoi.kakao;
 
+import java.util.*;
+
 public class Solution_KakaoBlind2022 {
 
     /**
@@ -32,5 +34,58 @@ public class Solution_KakaoBlind2022 {
             if(num % i == 0) return false;
         }
         return true;
+    }
+
+    /*--------------------------------------------------------------------------------------------------------------*/
+    /**
+     * #92341 주차 요금 계산
+     * - fee의 길이 = 4
+     * @param fees : 주차요금을 나타내는 정수 배열
+     * @param records : 자동차의 입/출차 내역을 나타내는 문자열 배열
+     * @return 차량 번호가 작은 자동차부터 청구할 주차 요금을 차례대로 정수 배열에 담아서 return
+     * */
+    public int[] solution02(int[] fees, String[] records) {
+        Map<Integer, Integer> startTime = new HashMap<>();
+        Map<Integer, Integer> totalTime = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+
+        //입/출차 기록 분리
+        for (String s : records) {
+            String[] str = s.split(" ");
+            String[] times = str[0].split(":");
+            int min = (Integer.parseInt(times[0]) * 60) + Integer.parseInt(times[1]);
+            int num = Integer.parseInt(str[1]);
+            if (!startTime.containsKey(num)) {
+                set.add(num);
+                startTime.put(num, min);
+                if (!totalTime.containsKey(num)) {
+                    totalTime.put(num, 0);
+                }
+            } else {
+                totalTime.put(num, totalTime.get(num) + min - startTime.get(num));
+                startTime.remove(num);
+            }
+        }
+
+        int INF = (23 * 60) + 59; //출차내역이 없으면 23:59분에 출차된 것으로 간주
+        for (Integer key : startTime.keySet()) {
+            totalTime.put(key, totalTime.get(key) + INF - startTime.get(key));
+        }
+
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+        int[] answer = new int[set.size()];
+        int idx = 0;
+        for (int num : list) {
+            int time = totalTime.get(num);
+            if (time <= fees[0]) {
+                answer[idx] = fees[1];
+            } else {
+                answer[idx] = (int) (fees[1] + Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+            }
+            idx++;
+        }
+
+        return answer;
     }
 }
