@@ -32,4 +32,14 @@ class Solution_KakaoBlind2022Test {
         //then
         assertArrayEquals(result, new int[]{0,591});
     }
+
+    @Test
+    void 양궁대회() {
+        int n = 5;
+        int[] info = {2,1,1,1,0,0,0,0,0,0,0};
+
+        int[] result = sk.solution03(n, info);
+
+        assertArrayEquals(result, new int[]{0,2,2,0,1,0,0,0,0,0,0});
+    }
 }
