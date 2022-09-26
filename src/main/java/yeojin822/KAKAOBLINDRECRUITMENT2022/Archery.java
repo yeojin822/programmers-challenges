@@ -5,9 +5,16 @@ package yeojin822.KAKAOBLINDRECRUITMENT2022;
  * [92342] 양궁대회
  */
 public class Archery {
-    static int[] res = { -1 };
+    static int[] res;
     static int[] lion;
     static int max = -1000;
+
+    public int[] solution(int n, int[] info) {
+        res = new int[]{-1};
+        lion = new int[11];
+        dfs(info,1,n);
+        return res;
+    }
 
     public void dfs(int[] info, int cnt, int n) {
         if(cnt == n+1) {
@@ -38,9 +45,5 @@ public class Archery {
         }
     }
 
-    public int[] solution(int n, int[] info) {
-        lion = new int[11];
-        dfs(info,1,n);
-        return res;
-    }
+
 }
