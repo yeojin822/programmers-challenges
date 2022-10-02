@@ -1,6 +1,7 @@
 package imyoi.hash;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Solution_Hash {
 
@@ -17,5 +18,25 @@ public class Solution_Hash {
             }
         }
         return true;
+    }
+
+    /**
+     * #42578 위장
+     * @param clothes : 스파이가 가진 의상들이 담긴 2차원 배열
+     * @return 서로 다른 옷의 조합의 수
+     * */
+    public int solution02(String[][] clothes) {
+        int answer = 1;
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < clothes.length; i++){
+            String cloth_type = clothes[i][1];
+            map.put(cloth_type, map.getOrDefault(cloth_type, 1) + 1);
+        }
+        for (String s : map.keySet()) {
+            answer *= map.get(s);
+        }
+
+        return answer -1;
     }
 }

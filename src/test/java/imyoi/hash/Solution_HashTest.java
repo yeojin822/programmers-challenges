@@ -2,6 +2,7 @@ package imyoi.hash;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class Solution_HashTest {
@@ -13,5 +14,16 @@ class Solution_HashTest {
         boolean result = sh.solution01(phone_book);
 
         assertFalse(result);
+    }
+
+    @Test
+    void 위장() {
+        String[][] clothes = {{"yellow_hat","headgear"}
+                , {"blue_sunglasses","eyewear"}
+                , {"green_turban","headgear"}};
+
+        int result = sh.solution02(clothes);
+
+        assertEquals(result, 5);
     }
 }
